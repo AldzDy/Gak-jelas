@@ -1,1 +1,1 @@
-# Gak-jelas
+SCRIPT VIP 
