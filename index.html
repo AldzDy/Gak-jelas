@@ -864,18 +864,18 @@
         
         // 1. Konfigurasi API
         // ==========================================================
-        const API_BASE_URL = 'hthttps://gak-jelas.vercel.app/project/api.php'; // URL API backend Anda
+        const API_BASE_URL = 'https://gak-jelas.vercel.app/project/api.php'; // URL API backend Anda
         const API2_BASE_URL = 'https://gak-jelas.vercel.app/project/api2.php'; // URL API2 backend Anda
 
         // 2. Konfigurasi Aplikasi
         // ==========================================================
-        const MIN_BALANCE_FOR_CPM = 0; // Minimal saldo untuk mengakses fitur CPM
-        const UNLOCK_ALL_CARS_PRICE = 0; // Harga untuk unlock all cars
-        const UNLOCK_POLICE_PRICE = 0; // Harga untuk unlock police
-        const COSTUME_ENGINE_PRICE = 0; // Harga untuk costume engine
-        const COSTUME_STEERING_PRICE = 0; // Harga untuk costume steering
-        const UNLOCK_BODYKIT_PRICE = 0; // Harga untuk unlock body kit
-        const CHROME_BODY_PRICE = 0; // Harga untuk chrome body
+        const MIN_BALANCE_FOR_CPM = 10000; // Minimal saldo untuk mengakses fitur CPM
+        const UNLOCK_ALL_CARS_PRICE = 10000; // Harga untuk unlock all cars
+        const UNLOCK_POLICE_PRICE = 5000; // Harga untuk unlock police
+        const COSTUME_ENGINE_PRICE = 5000; // Harga untuk costume engine
+        const COSTUME_STEERING_PRICE = 2000; // Harga untuk costume steering
+        const UNLOCK_BODYKIT_PRICE = 3000; // Harga untuk unlock body kit
+        const CHROME_BODY_PRICE = 2500; // Harga untuk chrome body
         const APP_NAME = '🛒 ESPO STORE'; // Nama aplikasi
         const CURRENCY = 'Rp'; // Simbol mata uang
 
@@ -2214,9 +2214,11 @@
                                 <button 
                                     onClick={handleCPM1Click}
                                     className={`buy-button w-full ${userBalance >= MIN_BALANCE_FOR_CPM ? '' : 'opacity-50 cursor-not-allowed'}`}
-                                    disabled={!userBalance < MIN_BALANCE_FOR_CPM}
+                                    disabled={!isLoggedIn || userBalance < MIN_BALANCE_FOR_CPM}
                                 >
-                                    {userBalance >= MIN_BALANCE_FOR_CPM ? 'BUY' : 'SALDO TIDAK MENCUKUPI'}
+                                    {isLoggedIn ? (
+                                        userBalance >= MIN_BALANCE_FOR_CPM ? 'BUY' : 'SALDO TIDAK MENCUKUPI'
+                                    ) : 'LOGIN UNTUK MEMBELI'}
                                 </button>
                             </div>
                         </div>
@@ -2239,9 +2241,11 @@
                                 <button 
                                     onClick={handleCPM2Click}
                                     className={`buy-button w-full ${userBalance >= MIN_BALANCE_FOR_CPM ? '' : 'opacity-50 cursor-not-allowed'}`}
-                                    disabled={!userBalance < MIN_BALANCE_FOR_CPM}
+                                    disabled={!isLoggedIn || userBalance < MIN_BALANCE_FOR_CPM}
                                 >
-                                    {userBalance >= MIN_BALANCE_FOR_CPM ? 'BUY' : 'SALDO TIDAK MENCUKUPI'}
+                                    {isLoggedIn ? (
+                                        userBalance >= MIN_BALANCE_FOR_CPM ? 'BUY' : 'SALDO TIDAK MENCUKUPI'
+                                    ) : 'LOGIN UNTUK MEMBELI'}
                                 </button>
                             </div>
                         </div>
@@ -2265,9 +2269,11 @@
                                 <button 
                                     onClick={handleUnlockAllCars}
                                     className={`buy-button w-full ${userBalance >= UNLOCK_ALL_CARS_PRICE ? '' : 'opacity-50 cursor-not-allowed'}`}
-                                    disabled={!userBalance < UNLOCK_ALL_CARS_PRICE}
+                                    disabled={!isLoggedIn || userBalance < UNLOCK_ALL_CARS_PRICE}
                                 >
-                                    {userBalance >= UNLOCK_ALL_CARS_PRICE ? 'BUY' : 'SALDO TIDAK MENCUKUPI'}
+                                    {isLoggedIn ? (
+                                        userBalance >= UNLOCK_ALL_CARS_PRICE ? 'BUY' : 'SALDO TIDAK MENCUKUPI'
+                                    ) : 'LOGIN UNTUK MEMBELI'}
                                 </button>
                             </div>
                             {userBalance < UNLOCK_ALL_CARS_PRICE && (
@@ -2296,9 +2302,11 @@
                                 <button 
                                     onClick={handleUnlockPolice}
                                     className={`buy-button w-full ${userBalance >= UNLOCK_POLICE_PRICE ? '' : 'opacity-50 cursor-not-allowed'}`}
-                                    disabled={!userBalance < UNLOCK_POLICE_PRICE}
+                                    disabled={!isLoggedIn || userBalance < UNLOCK_POLICE_PRICE}
                                 >
-                                    {userBalance >= UNLOCK_POLICE_PRICE ? 'BUY' : 'SALDO TIDAK MENCUKUPI'}
+                                    {isLoggedIn ? (
+                                        userBalance >= UNLOCK_POLICE_PRICE ? 'BUY' : 'SALDO TIDAK MENCUKUPI'
+                                    ) : 'LOGIN UNTUK MEMBELI'}
                                 </button>
                             </div>
                             {userBalance < UNLOCK_POLICE_PRICE && (
@@ -2329,7 +2337,9 @@
                                     className={`buy-button w-full ${userBalance >= COSTUME_ENGINE_PRICE ? '' : 'opacity-50 cursor-not-allowed'}`}
                                     disabled={!isLoggedIn || userBalance < COSTUME_ENGINE_PRICE}
                                 >
-                                    {userBalance >= COSTUME_ENGINE_PRICE ? 'BUY' : 'SALDO TIDAK MENCUKUPI'}
+                                    {isLoggedIn ? (
+                                        userBalance >= COSTUME_ENGINE_PRICE ? 'BUY' : 'SALDO TIDAK MENCUKUPI'
+                                    ) : 'LOGIN UNTUK MEMBELI'}
                                 </button>
                             </div>
                             {userBalance < COSTUME_ENGINE_PRICE && (
@@ -2358,9 +2368,11 @@
                                 <button 
                                     onClick={handleCostumeSteering}
                                     className={`buy-button w-full ${userBalance >= COSTUME_STEERING_PRICE ? '' : 'opacity-50 cursor-not-allowed'}`}
-                                    disabled={!userBalance < COSTUME_STEERING_PRICE}
+                                    disabled={!isLoggedIn || userBalance < COSTUME_STEERING_PRICE}
                                 >
-                                    {userBalance >= COSTUME_STEERING_PRICE ? 'BUY' : 'SALDO TIDAK MENCUKUPI'}
+                                    {isLoggedIn ? (
+                                        userBalance >= COSTUME_STEERING_PRICE ? 'BUY' : 'SALDO TIDAK MENCUKUPI'
+                                    ) : 'LOGIN UNTUK MEMBELI'}
                                 </button>
                             </div>
                             {userBalance < COSTUME_STEERING_PRICE && (
@@ -2389,9 +2401,11 @@
                                 <button 
                                     onClick={handleBodyKit}
                                     className={`buy-button w-full ${userBalance >= UNLOCK_BODYKIT_PRICE ? '' : 'opacity-50 cursor-not-allowed'}`}
-                                    disabled={!userBalance < UNLOCK_BODYKIT_PRICE}
+                                    disabled={!isLoggedIn || userBalance < UNLOCK_BODYKIT_PRICE}
                                 >
-                                    {userBalance >= UNLOCK_BODYKIT_PRICE ? 'BUY' : 'SALDO TIDAK MENCUKUPI'}
+                                    {isLoggedIn ? (
+                                        userBalance >= UNLOCK_BODYKIT_PRICE ? 'BUY' : 'SALDO TIDAK MENCUKUPI'
+                                    ) : 'LOGIN UNTUK MEMBELI'}
                                 </button>
                             </div>
                             {userBalance < UNLOCK_BODYKIT_PRICE && (
@@ -2420,9 +2434,11 @@
                                 <button 
                                     onClick={handleChromeBody}
                                     className={`buy-button w-full ${userBalance >= CHROME_BODY_PRICE ? '' : 'opacity-50 cursor-not-allowed'}`}
-                                    disabled={!userBalance < CHROME_BODY_PRICE}
+                                    disabled={!isLoggedIn || userBalance < CHROME_BODY_PRICE}
                                 >
-                                    {userBalance >= CHROME_BODY_PRICE ? 'BUY' : 'SALDO TIDAK MENCUKUPI'}
+                                    {isLoggedIn ? (
+                                        userBalance >= CHROME_BODY_PRICE ? 'BUY' : 'SALDO TIDAK MENCUKUPI'
+                                    ) : 'LOGIN UNTUK MEMBELI'}
                                 </button>
                             </div>
                             {userBalance < CHROME_BODY_PRICE && (
