@@ -864,18 +864,18 @@
         
         // 1. Konfigurasi API
         // ==========================================================
-        const API_BASE_URL = 'https://gak-jelas.vercel.app/projects/api.php'; // URL API backend Anda
-        const API2_BASE_URL = 'https://gak-jelas.vercel.app/projects/api2.php'; // URL API2 backend Anda
+        const API_BASE_URL = 'https://espostory.my.id/projects/api.php'; // URL API backend Anda
+        const API2_BASE_URL = 'https://espostory.my.id/projects/api2.php'; // URL API2 backend Anda
 
         // 2. Konfigurasi Aplikasi
         // ==========================================================
-        const MIN_BALANCE_FOR_CPM = 1000; // Minimal saldo untuk mengakses fitur CPM
-        const UNLOCK_ALL_CARS_PRICE = 1000; // Harga untuk unlock all cars
-        const UNLOCK_POLICE_PRICE = 5000; // Harga untuk unlock police
-        const COSTUME_ENGINE_PRICE = 5000; // Harga untuk costume engine
-        const COSTUME_STEERING_PRICE = 2000; // Harga untuk costume steering
-        const UNLOCK_BODYKIT_PRICE = 3000; // Harga untuk unlock body kit
-        const CHROME_BODY_PRICE = 2500; // Harga untuk chrome body
+        const MIN_BALANCE_FOR_CPM = 0; // Minimal saldo untuk mengakses fitur CPM
+        const UNLOCK_ALL_CARS_PRICE = 0; // Harga untuk unlock all cars
+        const UNLOCK_POLICE_PRICE = 0; // Harga untuk unlock police
+        const COSTUME_ENGINE_PRICE = 0; // Harga untuk costume engine
+        const COSTUME_STEERING_PRICE = 0; // Harga untuk costume steering
+        const UNLOCK_BODYKIT_PRICE = 0; // Harga untuk unlock body kit
+        const CHROME_BODY_PRICE = 0; // Harga untuk chrome body
         const APP_NAME = '🛒 ESPO STORE'; // Nama aplikasi
         const CURRENCY = 'Rp'; // Simbol mata uang
 
@@ -1268,11 +1268,6 @@
             };
 
             const handleUnlockAllCars = () => {
-                if (!isLoggedIn) {
-                    showNotification('Silakan login terlebih dahulu', 'error');
-                    setCurrentPage('login');
-                    return;
-                }
                 
                 if (userBalance < UNLOCK_ALL_CARS_PRICE) {
                     showNotification(`Saldo Anda tidak mencukupi. Minimal saldo ${CURRENCY} ${UNLOCK_ALL_CARS_PRICE.toLocaleString('id-ID')} untuk mengakses fitur ini.`, 'error');
@@ -1286,192 +1281,6 @@
                 setUnlockResult(null);
                 setUnlockEmail('');
                 setUnlockPassword('');
-            };
-
-            const handleUnlockPolice = () => {
-                if (!isLoggedIn) {
-                    showNotification('Silakan login terlebih dahulu', 'error');
-                    setCurrentPage('login');
-                    return;
-                }
-                
-                if (userBalance < UNLOCK_POLICE_PRICE) {
-                    showNotification(`Saldo Anda tidak mencukupi. Minimal saldo ${CURRENCY} ${UNLOCK_POLICE_PRICE.toLocaleString('id-ID')} untuk mengakses fitur ini.`, 'error');
-                    setCurrentPage('payment');
-                    return;
-                }
-                
-                setShowUnlockPoliceModal(true);
-                setUnlockPoliceProgress(0);
-                setUnlockPoliceStatus('');
-                setUnlockPoliceResult(null);
-                setUnlockPoliceEmail('');
-                setUnlockPolicePassword('');
-            };
-
-            const handleCostumeEngine = () => {
-                if (!isLoggedIn) {
-                    showNotification('Silakan login terlebih dahulu', 'error');
-                    setCurrentPage('login');
-                    return;
-                }
-                
-                if (userBalance < COSTUME_ENGINE_PRICE) {
-                    showNotification(`Saldo Anda tidak mencukupi. Minimal saldo ${CURRENCY} ${COSTUME_ENGINE_PRICE.toLocaleString('id-ID')} untuk mengakses fitur ini.`, 'error');
-                    setCurrentPage('payment');
-                    return;
-                }
-                
-                setShowCostumeEngineModal(true);
-                setCostumeEngineProgress(0);
-                setCostumeEngineStatus('');
-                setCostumeEngineResult(null);
-                setCostumeEngineEmail('');
-                setCostumeEnginePassword('');
-            };
-            
-            const handleCostumeSteering = () => {
-                if (!isLoggedIn) {
-                    showNotification('Silakan login terlebih dahulu', 'error');
-                    setCurrentPage('login');
-                    return;
-                }
-                
-                if (userBalance < COSTUME_STEERING_PRICE) {
-                    showNotification(`Saldo Anda tidak mencukupi. Minimal saldo ${CURRENCY} ${COSTUME_STEERING_PRICE.toLocaleString('id-ID')} untuk mengakses fitur ini.`, 'error');
-                    setCurrentPage('payment');
-                    return;
-                }
-                
-                setShowCostumeSteeringModal(true);
-                setCostumeSteeringProgress(0);
-                setCostumeSteeringStatus('');
-                setCostumeSteeringResult(null);
-                setCostumeSteeringEmail('');
-                setCostumeSteeringPassword('');
-                setSelectedSteeringAngle(40); // Reset to default
-            };
-            
-            const handleBodyKit = () => {
-                if (!isLoggedIn) {
-                    showNotification('Silakan login terlebih dahulu', 'error');
-                    setCurrentPage('login');
-                    return;
-                }
-                
-                if (userBalance < UNLOCK_BODYKIT_PRICE) {
-                    showNotification(`Saldo Anda tidak mencukupi. Minimal saldo ${CURRENCY} ${UNLOCK_BODYKIT_PRICE.toLocaleString('id-ID')} untuk mengakses fitur ini.`, 'error');
-                    setCurrentPage('payment');
-                    return;
-                }
-                
-                setShowBodyKitModal(true);
-                setBodyKitProgress(0);
-                setBodyKitStatus('');
-                setBodyKitResult(null);
-                setBodyKitEmail('');
-                setBodyKitPassword('');
-                setSelectedBodyKitType('all'); // Reset to default
-                setCarCount(0); // Reset car count
-            };
-            
-            // === FUNGSI BARU UNTUK CHROME BODY ===
-            const handleChromeBody = () => {
-                if (!isLoggedIn) {
-                    showNotification('Silakan login terlebih dahulu', 'error');
-                    setCurrentPage('login');
-                    return;
-                }
-                
-                if (userBalance < CHROME_BODY_PRICE) {
-                    showNotification(`Saldo Anda tidak mencukupi. Minimal saldo ${CURRENCY} ${CHROME_BODY_PRICE.toLocaleString('id-ID')} untuk mengakses fitur ini.`, 'error');
-                    setCurrentPage('payment');
-                    return;
-                }
-                
-                setShowChromeBodyModal(true);
-                setChromeBodyProgress(0);
-                setChromeBodyStatus('');
-                setChromeBodyResult(null);
-                setChromeBodyEmail('');
-                setChromeBodyPassword('');
-                setChromeValue(2.0); // Reset to default
-                setSelectedChromeOption('both'); // Reset to default
-                setChromeIndex1(21); // Reset to default
-                setChromeIndex2(22); // Reset to default
-            };
-
-            const handlePaymentClick = () => {
-                if (!isLoggedIn) {
-                    showNotification('Silakan login terlebih dahulu', 'error');
-                    setCurrentPage('login');
-                    return;
-                }
-                
-                setCurrentPage('payment');
-            };
-
-            const goHome = () => {
-                setCurrentPage('home');
-                setEmail('');
-                setPassword('');
-                setStatus('');
-                setPaymentName('');
-                setPaymentWhatsApp('');
-                setPaymentEmail('');
-                setPaymentAmount('');
-                setPaymentProof(null);
-                setPaymentProofPreview('');
-            };
-
-            const handlePaymentProofChange = (e) => {
-                const file = e.target.files[0];
-                if (file) {
-                    setPaymentProof(file);
-                    const reader = new FileReader();
-                    reader.onloadend = () => {
-                        setPaymentProofPreview(reader.result);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            };
-
-            const handlePaymentSubmit = async (e) => {
-                e.preventDefault();
-                setIsLoading(true);
-                
-                try {
-                    const formData = new FormData();
-                    formData.append('name', paymentName);
-                    formData.append('whatsapp', paymentWhatsApp);
-                    formData.append('email', paymentEmail);
-                    formData.append('amount', paymentAmount);
-                    if (paymentProof) {
-                        formData.append('proof', paymentProof);
-                    }
-                    
-                    const result = await apiRequest('payment', 'POST', formData, true, token);
-                    
-                    if (result.success) {
-                        showNotification('Pembayaran berhasil dikirim! Kami akan memproses pesanan Anda segera.', 'success');
-                        
-                        setTimeout(() => {
-                            setPaymentName('');
-                            setPaymentWhatsApp('');
-                            setPaymentEmail('');
-                            setPaymentAmount('');
-                            setPaymentProof(null);
-                            setPaymentProofPreview('');
-                            setCurrentPage('dashboard');
-                        }, 3000);
-                    } else {
-                        throw new Error(result.error || 'Payment failed');
-                    }
-                } catch (error) {
-                    showNotification(`Error: ${error.message}`, 'error');
-                } finally {
-                    setIsLoading(false);
-                }
             };
 
             const useCPMService = async (email, password) => {
@@ -2094,9 +1903,7 @@
                             <button 
                                 onClick={handleCPM1Click}
                                 className="buy-button w-full"
-                                disabled={!isLoggedIn}
-                            >
-                                {isLoggedIn ? 'BUY' : 'LOGIN DULU'}
+
                             </button>
                             {userBalance < MIN_BALANCE_FOR_CPM && (
                                 <div className="lock-icon">
@@ -2120,9 +1927,7 @@
                             <button 
                                 onClick={handleCPM2Click}
                                 className="buy-button w-full"
-                                disabled={!isLoggedIn}
-                            >
-                                {isLoggedIn ? 'BUY' : 'LOGIN DULU'}
+
                             </button>
                             {userBalance < MIN_BALANCE_FOR_CPM && (
                                 <div className="lock-icon">
@@ -3767,10 +3572,10 @@
                                 required
                             >
                                 <option value="">Pilih jumlah</option>
-                                <option value="1000">{CURRENCY} 10.000</option>
+                                <option value="10000">{CURRENCY} 10.000</option>
                                 <option value="25000">{CURRENCY} 25.000</option>
                                 <option value="50000">{CURRENCY} 50.000</option>
-                                <option value="1000">{CURRENCY} 100.000</option>
+                                <option value="100000">{CURRENCY} 100.000</option>
                                 <option value="200000">{CURRENCY} 200.000</option>
                                 <option value="500000">{CURRENCY} 500.000</option>
                             </select>
